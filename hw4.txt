@@ -1,0 +1,80 @@
+1. Виберіть будь-який сайт. Пройдіть шлях: dig → ip route get → traceroute -n
+
+1.1 
+dig +short rozetka.com
+64.190.63.222
+
+Коментар: Отримав IP 
+
+1.2 
+ip route get 64.190.63.222
+64.190.63.222 via 192.168.50.1 dev enp0s3 src 192.168.50.147
+
+Коментар: IP сайту = 64.190.63.222, Шлюз = 192.168.50.1, Інтерфейс = enp0s3, Моя IP = 192.168.50.147
+
+1.3 
+traceroute -n rozetka.com
+traceroute to rozetka.com (64.190.63.222), 30 hops max, 60 byte packets
+ 1  192.168.50.1  2.325 ms  2.671 ms  2.643 ms
+ 2  10.0.255.255  3.572 ms  3.545 ms  3.762 ms
+ 3  194.33.189.15  3.736 ms  3.709 ms  3.682 ms
+ 4  87.245.247.158  3.889 ms  3.577 ms  3.837 ms
+ 5  87.245.233.39  22.901 ms  22.870 ms  23.116 ms
+ 6  193.178.185.54  23.827 ms  21.897 ms  21.561 ms
+ 7  212.227.117.10  34.943 ms  34.653 ms  34.834 ms
+ 8  80.81.192.123  30.392 ms  30.386 ms  30.381 ms
+ 9  185.1.208.130  34.485 ms  35.051 ms  34.402 ms
+10  212.227.117.118  34.734 ms  34.733 ms  34.686 ms
+
+Коментар: Збігається шлюз у виводі ip route get із першим хопом у traceroute
+
+2. Зніміть tcpdump під час curl. Знайдіть у виводі SYN, SYN-ACK, ACK
+
+sudo tcpdump -n -i any host example.com and port 443
+
+tcpdump: data link type LINUX_SLL2
+tcpdump: verbose output suppressed, use -v[v]... for full protocol decode
+listening on any, link-type LINUX_SLL2 (Linux cooked v2), snapshot length 262144 bytes
+18:51:33.720596 enp0s3 Out IP 192.168.50.147.38204 > 104.20.23.154.443: Flags [S], seq 51573454, win 64240, options [mss 1460,sackOK,TS val 3861093260 ecr 0,nop,wscale 7], length 0
+18:51:33.739742 enp0s3 In  IP 104.20.23.154.443 > 192.168.50.147.38204: Flags [S.], seq 961182474, ack 51573455, win 65535, options [mss 1400,sackOK,TS val 4174183915 ecr 3861093260,nop,wscale 13], length 0
+18:51:33.739780 enp0s3 Out IP 192.168.50.147.38204 > 104.20.23.154.443: Flags [.], ack 1, win 502, options [nop,nop,TS val 3861093279 ecr 4174183915], length 0
+18:51:33.740793 enp0s3 Out IP 192.168.50.147.38204 > 104.20.23.154.443: Flags [P.], seq 1:518, ack 1, win 502, options [nop,nop,TS val 3861093280 ecr 4174183915], length 517
+
+Коментар: SYN-18:51:33.720596 та PUSH-18:51:33.740793, різниця ~20 мс
+
+3. Запишіть у файл: скільки хопів, який ваш шлюз, який MAC у шлюзу
+
+3.1
+traceroute rozetka.com
+traceroute to rozetka.com (64.190.63.222), 30 hops max, 60 byte packets
+ 1  RT-AX57-DB50 (192.168.50.1)  0.588 ms  2.577 ms  2.551 ms
+ 2  gw-kyiv.lanet (10.0.255.255)  1.637 ms  1.602 ms  1.572 ms
+ 3  194.33.189.15 (194.33.189.15)  1.720 ms  1.804 ms  1.725 ms
+ 4  ae1-210.rt.bmb.kiv.ua.retn.net (87.245.247.158)  2.078 ms  2.212 ms  2.012 ms
+ 5  ae4-9.rt.ipb.ber.de.retn.net (87.245.233.39)  21.266 ms  21.238 ms  21.209 ms
+ 6  ionos.bcix.de (193.178.185.54)  21.822 ms  21.639 ms  21.703 ms
+ 7  lo-0.bb-b.fr7.fra.de.net.ionos.com (212.227.117.10)  34.798 ms  34.887 ms  34.740 ms
+ 8  decix.bb-a.fra3.fra.de.net.ionos.com (80.81.192.123)  34.712 ms  30.928 ms  30.901 ms
+ 9  decix.bb-a.muc4.muc.de.net.ionos.com (185.1.208.130)  34.630 ms  34.720 ms  34.689 ms
+10  lo-0-0.rc-a.ess.muc.de.net.ionos.com (212.227.117.118)  34.981 ms  35.300 ms  35.244 ms
+
+Коментар: До сайту відповіли перші 10 хопів, далі маршрутизатори не відповідали на запити traceroute.
+
+3.2
+ip route get 64.190.63.222
+64.190.63.222 via 192.168.50.1 dev enp0s3 src 192.168.50.147 uid 1000
+    cache
+
+Коментар: IP шлюзу = 192.168.50.1
+
+3.3
+ip neigh
+192.168.50.1 dev enp0s3 lladdr 10:7c:61:7f:db:50 REACHABLE
+192.168.50.209 dev enp0s3 lladdr c8:7f:54:a0:f6:17 REACHABLE
+
+Коментар: MAC шлюзу = 10:7c:61:7f:db:50
+
+
+4. Поясніть письмово в 5 реченнях, чому MAC змінюється, а IP — ні
+
+MAC-адреса використовується тільки всередині локальної мережі між двома сусідніми пристроями. Коли пакет переходить через маршрутизатор, він створює новий кадр із новими MAC адресами відправника й отримувача. IP адреси при цьому залишаються незмінними, тому що вони визначають кінцеві вузли зв'язку. Завдяки цьому маршрутизатори можуть доставити пакет через багато різних мереж до потрібного отримувача. Тому MAC адреси змінюються на кожному хопі, а IP адреси ні.
