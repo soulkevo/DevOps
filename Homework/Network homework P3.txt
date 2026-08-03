@@ -1,0 +1,62 @@
+1. Оберіть сайт. Пройдіть шлях: dig (A, AAAA, NS, SOA) → ip route get → traceroute
+
+    dig example.com A +short
+        172.66.147.243
+        104.20.23.154
+    dig example.com AAAA +short
+        2606:4700:10::ac42:93f3
+        2606:4700:10::6814:179a
+    dig example.com NS +short
+        elliot.ns.cloudflare.com.
+        hera.ns.cloudflare.com.
+    dig example.com SOA +short
+        elliot.ns.cloudflare.com. dns.cloudflare.com. 2410849323 10000 2400 604800 1800
+    ip route get 172.66.147.243
+        172.66.147.243 via 192.168.50.1 dev enp0s3 src 192.168.50.147
+    traceroute -n example.com
+        traceroute to example.com (104.20.23.154), 30 hops max, 60 byte packets
+         1  192.168.50.1  1.362 ms  1.258 ms  1.182 ms
+         2  10.0.255.255  5.882 ms  5.814 ms  5.748 ms
+         3  194.33.189.55  5.683 ms  5.616 ms  5.348 ms
+         4  185.1.62.76  5.278 ms  5.211 ms *
+         5  104.20.23.154  5.077 ms  5.011 ms  4.941 ms
+
+    Коментар: сайт має IPv4 та IPv6 адреси; DNS обслуговується Cloudflare; SOA serial дорівнює 2410849323; шлюз за замовчуванням 192.168.50.1; перший хоп traceroute збігається зі шлюзом.
+
+
+2. Зніміть дамп під час curl -v. У Wireshark знайдіть: handshake, ClientHello з SNI, першу відповідь
+    sudo tcpdump -i any -w final.pcap -n host example.com
+    curl -v https://example.com > /dev/null
+
+    Коментар: У дампі були знайдені: TCP Three-way Handshake; ClientHello із SNI; ServerHello; перший пакет із даними відповіді сервера.
+
+
+3. Виміряйте curl -w: час DNS, з'єднання, TLS, до першого байта. Що найдовше?
+
+    curl -o /dev/null -s https://example.com -w "\
+    dns: %{time_namelookup}
+    connect: %{time_connect}
+    tls: %{time_appconnect}
+    ttfb: %{time_starttransfer}
+    total: %{time_total}
+    "
+        dns: 0.006760
+        connect: 0.025650
+        tls: 0.049203
+        ttfb: 0.072849
+        total: 0.072881
+
+    Коментар: Найбільше часу зайняло TLS-рукостискання. DNS виконався дуже швидко (близько 7 мс), встановлення TCP-з'єднання — приблизно 26 мс, а повний час отримання першого байта відповіді склав приблизно 73 мс.
+
+
+4. openssl s_client: хто підписав, скільки днів лишилось, чи весь ланцюжок віддано
+
+    openssl s_client -connect example.com:443 \
+    -servername example.com </dev/null 2>/dev/null \
+    | openssl x509 -noout -subject -issuer -dates
+        subject=CN = example.com
+        issuer=C = US, O = SSL Corporation, CN = Cloudflare TLS Issuing ECC CA 3
+        notBefore=Jul 29 22:10:08 2026 GMT
+        notAfter=Oct 27 22:17:21 2026 GMT
+
+    Коментар: Сертифікат є чинним, виданий центром сертифікації Cloudflare TLS Issuing ECC CA 3, використовується для домену example.com.
