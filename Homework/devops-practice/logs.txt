@@ -1,0 +1,842 @@
+kevo@Linux:~/devops-practice$ docker pull python:3.12
+docker pull python:3.12-slim
+3.12: Pulling from library/python
+1da3cb2f93f2: Pull complete
+68b64c51cda3: Pull complete
+ec935196e6a0: Pull complete
+d74736caedd4: Pull complete
+1e94118fbd5f: Pull complete
+27fa823e08a1: Pull complete
+72a07b5b316d: Pull complete
+Digest: sha256:e5931cdb4a8cec0ad083277c16a39114f14123b8b6c858c8c9689b677789975c
+Status: Downloaded newer image for python:3.12
+docker.io/library/python:3.12
+3.12-slim: Pulling from library/python
+26c307b5e35a: Already exists
+fa18dfb1257a: Pull complete
+b952fe9f6810: Pull complete
+6760bfe2ff00: Pull complete
+Digest: sha256:2c941e860699f878900b0edc2403613c234d4b32eda3cc9fa7036991a2a63c4a
+Status: Downloaded newer image for python:3.12-slim
+docker.io/library/python:3.12-slim
+kevo@Linux:~/devops-practice$ docker history python:3.12
+IMAGE          CREATED       CREATED BY                                      SIZE      COMMENT
+37ee34ed0a73   10 days ago   CMD ["python3"]                                 0B        buildkit.dockerfile.v0
+<missing>      10 days ago   RUN /bin/sh -c set -eux;  for src in idle3 p…   36B       buildkit.dockerfile.v0
+<missing>      10 days ago   RUN /bin/sh -c set -eux;   wget -O python.ta…   68.5MB    buildkit.dockerfile.v0
+<missing>      10 days ago   ENV PYTHON_SHA256=5c8462af5790baf43a321a1559…   0B        buildkit.dockerfile.v0
+<missing>      10 days ago   ENV PYTHON_VERSION=3.12.14                      0B        buildkit.dockerfile.v0
+<missing>      10 days ago   ENV GPG_KEY=7169605F62C751356D054A26A821E680…   0B        buildkit.dockerfile.v0
+<missing>      10 days ago   RUN /bin/sh -c set -eux;  apt-get update;  a…   17.9MB    buildkit.dockerfile.v0
+<missing>      10 days ago   ENV LANG=C.UTF-8                                0B        buildkit.dockerfile.v0
+<missing>      10 days ago   ENV PATH=/usr/local/bin:/usr/local/sbin:/usr…   0B        buildkit.dockerfile.v0
+<missing>      2 weeks ago   RUN /bin/sh -c set -ex;  apt-get update;  ap…   656MB     buildkit.dockerfile.v0
+<missing>      2 weeks ago   RUN /bin/sh -c set -eux;  apt-get update;  a…   185MB     buildkit.dockerfile.v0
+<missing>      2 weeks ago   RUN /bin/sh -c set -eux;  apt-get update;  a…   60.2MB    buildkit.dockerfile.v0
+<missing>      3 weeks ago   # debian.sh --arch 'amd64' out/ 'trixie' '@1…   120MB     debuerreotype 0.17
+kevo@Linux:~/devops-practice$ docker history python:3.12-slim
+IMAGE          CREATED       CREATED BY                                      SIZE      COMMENT
+613c5454f914   10 days ago   CMD ["python3"]                                 0B        buildkit.dockerfile.v0
+<missing>      10 days ago   RUN /bin/sh -c set -eux;  for src in idle3 p…   36B       buildkit.dockerfile.v0
+<missing>      10 days ago   RUN /bin/sh -c set -eux;   savedAptMark="$(a…   36.8MB    buildkit.dockerfile.v0
+<missing>      10 days ago   ENV PYTHON_SHA256=5c8462af5790baf43a321a1559…   0B        buildkit.dockerfile.v0
+<missing>      10 days ago   ENV PYTHON_VERSION=3.12.14                      0B        buildkit.dockerfile.v0
+<missing>      10 days ago   ENV GPG_KEY=7169605F62C751356D054A26A821E680…   0B        buildkit.dockerfile.v0
+<missing>      10 days ago   RUN /bin/sh -c set -eux;  apt-get update;  a…   3.81MB    buildkit.dockerfile.v0
+<missing>      10 days ago   ENV LANG=C.UTF-8                                0B        buildkit.dockerfile.v0
+<missing>      10 days ago   ENV PATH=/usr/local/bin:/usr/local/sbin:/usr…   0B        buildkit.dockerfile.v0
+<missing>      3 weeks ago   # debian.sh --arch 'amd64' out/ 'trixie' '@1…   78.6MB    debuerreotype 0.17
+kevo@Linux:~/devops-practice$ docker history --no-trunc python:3.12
+IMAGE                                                                     CREATED       CREATED BY                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               SIZE      COMMENT
+sha256:37ee34ed0a73271658c2a4ae71c0eff28365ed150c0e8421bbd105f13d5d22a7   10 days ago   CMD ["python3"]                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          0B        buildkit.dockerfile.v0
+<missing>                                                                 10 days ago   RUN /bin/sh -c set -eux;  for src in idle3 pip3 pydoc3 python3 python3-config; do   dst="$(echo "$src" | tr -d 3)";   [ -s "/usr/local/bin/$src" ];   [ ! -e "/usr/local/bin/$dst" ];   ln -svT "$src" "/usr/local/bin/$dst";  done # buildkit                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           36B       buildkit.dockerfile.v0
+<missing>                                                                 10 days ago   RUN /bin/sh -c set -eux;   wget -O python.tar.xz "https://www.python.org/ftp/python/${PYTHON_VERSION%%[a-z]*}/Python-$PYTHON_VERSION.tar.xz";  echo "$PYTHON_SHA256 *python.tar.xz" | sha256sum -c -;  wget -O python.tar.xz.asc "https://www.python.org/ftp/python/${PYTHON_VERSION%%[a-z]*}/Python-$PYTHON_VERSION.tar.xz.asc";  GNUPGHOME="$(mktemp -d)"; export GNUPGHOME;  gpg --batch --keyserver hkps://keys.openpgp.org --recv-keys "$GPG_KEY";  gpg --batch --verify python.tar.xz.asc python.tar.xz;  gpgconf --kill all;  rm -rf "$GNUPGHOME" python.tar.xz.asc;  mkdir -p /usr/src/python;  tar --extract --directory /usr/src/python --strip-components=1 --file python.tar.xz;  rm python.tar.xz;   cd /usr/src/python;  gnuArch="$(dpkg-architecture --query DEB_BUILD_GNU_TYPE)";  ./configure   --build="$gnuArch"   --enable-loadable-sqlite-extensions   --enable-optimizations   --enable-option-checking=fatal   --enable-shared   $(test "${gnuArch%%-*}" != 'riscv64' && echo '--with-lto')   --with-ensurepip  ;  nproc="$(nproc)";  EXTRA_CFLAGS="$(dpkg-buildflags --get CFLAGS)";  LDFLAGS="$(dpkg-buildflags --get LDFLAGS)";  arch="$(dpkg --print-architecture)"; arch="${arch##*-}";  case "$arch" in   amd64|arm64)    EXTRA_CFLAGS="${EXTRA_CFLAGS:-} -fno-omit-frame-pointer -mno-omit-leaf-frame-pointer";    ;;   i386)    ;;   *)    EXTRA_CFLAGS="${EXTRA_CFLAGS:-} -fno-omit-frame-pointer";    ;;  esac;  make -j "$nproc"   "EXTRA_CFLAGS=${EXTRA_CFLAGS:-}"   "LDFLAGS=${LDFLAGS:-}"  ;  rm python;  make -j "$nproc"   "EXTRA_CFLAGS=${EXTRA_CFLAGS:-}"   "LDFLAGS=${LDFLAGS:-} -Wl,-rpath='\$\$ORIGIN/../lib'"   python  ;  make install;   bin="$(readlink -ve /usr/local/bin/python3)";  dir="$(dirname "$bin")";  mkdir -p "/usr/share/gdb/auto-load/$dir";  cp -vL Tools/gdb/libpython.py "/usr/share/gdb/auto-load/$bin-gdb.py";   cd /;  rm -rf /usr/src/python;   find /usr/local -depth   \(    \( -type d -a \( -name test -o -name tests -o -name idle_test \) \)    -o \( -type f -a \( -name '*.pyc' -o -name '*.pyo' -o -name 'libpython*.a' \) \)   \) -exec rm -rf '{}' +  ;   ldconfig;   export PYTHONDONTWRITEBYTECODE=1;  python3 --version;  pip3 --version # buildkit   68.5MB    buildkit.dockerfile.v0
+<missing>                                                                 10 days ago   ENV PYTHON_SHA256=5c8462af5790baf43a321a1559dbe0db06d1be4300fb85fb53c40060668e548a                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       0B        buildkit.dockerfile.v0
+<missing>                                                                 10 days ago   ENV PYTHON_VERSION=3.12.14                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               0B        buildkit.dockerfile.v0
+<missing>                                                                 10 days ago   ENV GPG_KEY=7169605F62C751356D054A26A821E680E5FA6305                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     0B        buildkit.dockerfile.v0
+<missing>                                                                 10 days ago   RUN /bin/sh -c set -eux;  apt-get update;  apt-get install -y --no-install-recommends   libbluetooth-dev   tk-dev   uuid-dev  ;  apt-get dist-clean # buildkit                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           17.9MB    buildkit.dockerfile.v0
+<missing>                                                                 10 days ago   ENV LANG=C.UTF-8                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         0B        buildkit.dockerfile.v0
+<missing>                                                                 10 days ago   ENV PATH=/usr/local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     0B        buildkit.dockerfile.v0
+<missing>                                                                 2 weeks ago   RUN /bin/sh -c set -ex;  apt-get update;  apt-get install -y --no-install-recommends   autoconf   automake   bzip2   default-libmysqlclient-dev   dpkg-dev   file   g++   gcc   imagemagick   libbz2-dev   libc6-dev   libcurl4-openssl-dev   libdb-dev   libevent-dev   libffi-dev   libgdbm-dev   libglib2.0-dev   libgmp-dev   libjpeg-dev   libkrb5-dev   liblzma-dev   libmagickcore-dev   libmagickwand-dev   libmaxminddb-dev   libncurses5-dev   libncursesw5-dev   libpng-dev   libpq-dev   libreadline-dev   libsqlite3-dev   libssl-dev   libtool   libwebp-dev   libxml2-dev   libxslt-dev   libyaml-dev   make   patch   unzip   xz-utils   zlib1g-dev  ;  apt-get dist-clean # buildkit                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    656MB     buildkit.dockerfile.v0
+<missing>                                                                 2 weeks ago   RUN /bin/sh -c set -eux;  apt-get update;  apt-get install -y --no-install-recommends   git   mercurial   openssh-client   subversion     procps  ;  apt-get dist-clean # buildkit                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       185MB     buildkit.dockerfile.v0
+<missing>                                                                 2 weeks ago   RUN /bin/sh -c set -eux;  apt-get update;  apt-get install -y --no-install-recommends   ca-certificates   curl   gnupg   netbase   sq   wget  ;  apt-get dist-clean # buildkit                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           60.2MB    buildkit.dockerfile.v0
+<missing>                                                                 3 weeks ago   # debian.sh --arch 'amd64' out/ 'trixie' '@1785715200'                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   120MB     debuerreotype 0.17
+kevo@Linux:~/devops-practice$ docker history --no-trunc python:3.12-slim
+IMAGE                                                                     CREATED       CREATED BY                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      SIZE      COMMENT
+sha256:613c5454f914638dc2bfcab71c8630de0089f7ebff0a7239b54f34866c4b6051   10 days ago   CMD ["python3"]                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 0B        buildkit.dockerfile.v0
+<missing>                                                                 10 days ago   RUN /bin/sh -c set -eux;  for src in idle3 pip3 pydoc3 python3 python3-config; do   dst="$(echo "$src" | tr -d 3)";   [ -s "/usr/local/bin/$src" ];   [ ! -e "/usr/local/bin/$dst" ];   ln -svT "$src" "/usr/local/bin/$dst";  done # buildkit                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  36B       buildkit.dockerfile.v0
+<missing>                                                                 10 days ago   RUN /bin/sh -c set -eux;   savedAptMark="$(apt-mark showmanual)";  apt-get update;  apt-get install -y --no-install-recommends   dpkg-dev   gcc   gnupg   libbluetooth-dev   libbz2-dev   libc6-dev   libdb-dev   libffi-dev   libgdbm-dev   liblzma-dev   libncursesw5-dev   libreadline-dev   libsqlite3-dev   libssl-dev   make   tk-dev   uuid-dev   wget   xz-utils   zlib1g-dev  ;   wget -O python.tar.xz "https://www.python.org/ftp/python/${PYTHON_VERSION%%[a-z]*}/Python-$PYTHON_VERSION.tar.xz";  echo "$PYTHON_SHA256 *python.tar.xz" | sha256sum -c -;  wget -O python.tar.xz.asc "https://www.python.org/ftp/python/${PYTHON_VERSION%%[a-z]*}/Python-$PYTHON_VERSION.tar.xz.asc";  GNUPGHOME="$(mktemp -d)"; export GNUPGHOME;  gpg --batch --keyserver hkps://keys.openpgp.org --recv-keys "$GPG_KEY";  gpg --batch --verify python.tar.xz.asc python.tar.xz;  gpgconf --kill all;  rm -rf "$GNUPGHOME" python.tar.xz.asc;  mkdir -p /usr/src/python;  tar --extract --directory /usr/src/python --strip-components=1 --file python.tar.xz;  rm python.tar.xz;   cd /usr/src/python;  gnuArch="$(dpkg-architecture --query DEB_BUILD_GNU_TYPE)";  ./configure   --build="$gnuArch"   --enable-loadable-sqlite-extensions   --enable-optimizations   --enable-option-checking=fatal   --enable-shared   $(test "${gnuArch%%-*}" != 'riscv64' && echo '--with-lto')   --with-ensurepip  ;  nproc="$(nproc)";  EXTRA_CFLAGS="$(dpkg-buildflags --get CFLAGS)";  LDFLAGS="$(dpkg-buildflags --get LDFLAGS)";  LDFLAGS="${LDFLAGS:-} -Wl,--strip-all";  arch="$(dpkg --print-architecture)"; arch="${arch##*-}";  case "$arch" in   amd64|arm64)    EXTRA_CFLAGS="${EXTRA_CFLAGS:-} -fno-omit-frame-pointer -mno-omit-leaf-frame-pointer";    ;;   i386)    ;;   *)    EXTRA_CFLAGS="${EXTRA_CFLAGS:-} -fno-omit-frame-pointer";    ;;  esac;  make -j "$nproc"   "EXTRA_CFLAGS=${EXTRA_CFLAGS:-}"   "LDFLAGS=${LDFLAGS:-}"  ;  rm python;  make -j "$nproc"   "EXTRA_CFLAGS=${EXTRA_CFLAGS:-}"   "LDFLAGS=${LDFLAGS:-} -Wl,-rpath='\$\$ORIGIN/../lib'"   python  ;  make install;   cd /;  rm -rf /usr/src/python;   find /usr/local -depth   \(    \( -type d -a \( -name test -o -name tests -o -name idle_test \) \)    -o \( -type f -a \( -name '*.pyc' -o -name '*.pyo' -o -name 'libpython*.a' \) \)   \) -exec rm -rf '{}' +  ;   ldconfig;   apt-mark auto '.*' > /dev/null;  apt-mark manual $savedAptMark;  find /usr/local -type f -executable -not \( -name '*tkinter*' \) -exec ldd '{}' ';'   | awk '/=>/ { so = $(NF-1); if (index(so, "/usr/local/") == 1) { next }; gsub("^/(usr/)?", "", so); printf "*%s\n", so }'   | sort -u   | xargs -rt dpkg-query --search   | awk 'sub(":$", "", $1) { print $1 }'   | sort -u   | xargs -r apt-mark manual  ;  apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false;  apt-get dist-clean;   export PYTHONDONTWRITEBYTECODE=1;  python3 --version;  pip3 --version # buildkit   36.8MB    buildkit.dockerfile.v0
+<missing>                                                                 10 days ago   ENV PYTHON_SHA256=5c8462af5790baf43a321a1559dbe0db06d1be4300fb85fb53c40060668e548a                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              0B        buildkit.dockerfile.v0
+<missing>                                                                 10 days ago   ENV PYTHON_VERSION=3.12.14                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      0B        buildkit.dockerfile.v0
+<missing>                                                                 10 days ago   ENV GPG_KEY=7169605F62C751356D054A26A821E680E5FA6305                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            0B        buildkit.dockerfile.v0
+<missing>                                                                 10 days ago   RUN /bin/sh -c set -eux;  apt-get update;  apt-get install -y --no-install-recommends   ca-certificates   netbase   tzdata  ;  apt-get dist-clean # buildkit                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    3.81MB    buildkit.dockerfile.v0
+<missing>                                                                 10 days ago   ENV LANG=C.UTF-8                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                0B        buildkit.dockerfile.v0
+<missing>                                                                 10 days ago   ENV PATH=/usr/local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            0B        buildkit.dockerfile.v0
+<missing>                                                                 3 weeks ago   # debian.sh --arch 'amd64' out/ 'trixie' '@1785715200'                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          78.6MB    debuerreotype 0.17
+kevo@Linux:~/devops-practice$ mkdir task-A
+cd task-A
+kevo@Linux:~/devops-practice/task-A$ nano Dockerfile
+kevo@Linux:~/devops-practice/task-A$ docker build -t my-python .
+[+] Building 8.3s (6/6) FINISHED                                                                                           docker:default
+ => [internal] load build definition from Dockerfile                                                                                 0.0s
+ => => transferring dockerfile: 91B                                                                                                  0.0s
+ => [internal] load metadata for docker.io/library/python:3.12-slim                                                                  0.0s
+ => [internal] load .dockerignore                                                                                                    0.1s
+ => => transferring context: 2B                                                                                                      0.0s
+ => [1/2] FROM docker.io/library/python:3.12-slim                                                                                    0.1s
+ => [2/2] RUN pip install requests flask                                                                                             7.0s
+ => exporting to image                                                                                                               0.9s
+ => => exporting layers                                                                                                              0.8s
+ => => writing image sha256:7949baf3037935364e790fc0d8ca465daf17a59b6499e09e7feecdb2b21efdcc                                         0.0s
+ => => naming to docker.io/library/my-python                                                                                         0.0s
+kevo@Linux:~/devops-practice/task-A$ docker history --no-trunc my-python
+IMAGE                                                                     CREATED         CREATED BY                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      SIZE      COMMENT
+sha256:7949baf3037935364e790fc0d8ca465daf17a59b6499e09e7feecdb2b21efdcc   9 seconds ago   RUN /bin/sh -c pip install requests flask # buildkit                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            17.8MB    buildkit.dockerfile.v0
+<missing>                                                                 10 days ago     CMD ["python3"]                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 0B        buildkit.dockerfile.v0
+<missing>                                                                 10 days ago     RUN /bin/sh -c set -eux;  for src in idle3 pip3 pydoc3 python3 python3-config; do   dst="$(echo "$src" | tr -d 3)";   [ -s "/usr/local/bin/$src" ];   [ ! -e "/usr/local/bin/$dst" ];   ln -svT "$src" "/usr/local/bin/$dst";  done # buildkit                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  36B       buildkit.dockerfile.v0
+<missing>                                                                 10 days ago     RUN /bin/sh -c set -eux;   savedAptMark="$(apt-mark showmanual)";  apt-get update;  apt-get install -y --no-install-recommends   dpkg-dev   gcc   gnupg   libbluetooth-dev   libbz2-dev   libc6-dev   libdb-dev   libffi-dev   libgdbm-dev   liblzma-dev   libncursesw5-dev   libreadline-dev   libsqlite3-dev   libssl-dev   make   tk-dev   uuid-dev   wget   xz-utils   zlib1g-dev  ;   wget -O python.tar.xz "https://www.python.org/ftp/python/${PYTHON_VERSION%%[a-z]*}/Python-$PYTHON_VERSION.tar.xz";  echo "$PYTHON_SHA256 *python.tar.xz" | sha256sum -c -;  wget -O python.tar.xz.asc "https://www.python.org/ftp/python/${PYTHON_VERSION%%[a-z]*}/Python-$PYTHON_VERSION.tar.xz.asc";  GNUPGHOME="$(mktemp -d)"; export GNUPGHOME;  gpg --batch --keyserver hkps://keys.openpgp.org --recv-keys "$GPG_KEY";  gpg --batch --verify python.tar.xz.asc python.tar.xz;  gpgconf --kill all;  rm -rf "$GNUPGHOME" python.tar.xz.asc;  mkdir -p /usr/src/python;  tar --extract --directory /usr/src/python --strip-components=1 --file python.tar.xz;  rm python.tar.xz;   cd /usr/src/python;  gnuArch="$(dpkg-architecture --query DEB_BUILD_GNU_TYPE)";  ./configure   --build="$gnuArch"   --enable-loadable-sqlite-extensions   --enable-optimizations   --enable-option-checking=fatal   --enable-shared   $(test "${gnuArch%%-*}" != 'riscv64' && echo '--with-lto')   --with-ensurepip  ;  nproc="$(nproc)";  EXTRA_CFLAGS="$(dpkg-buildflags --get CFLAGS)";  LDFLAGS="$(dpkg-buildflags --get LDFLAGS)";  LDFLAGS="${LDFLAGS:-} -Wl,--strip-all";  arch="$(dpkg --print-architecture)"; arch="${arch##*-}";  case "$arch" in   amd64|arm64)    EXTRA_CFLAGS="${EXTRA_CFLAGS:-} -fno-omit-frame-pointer -mno-omit-leaf-frame-pointer";    ;;   i386)    ;;   *)    EXTRA_CFLAGS="${EXTRA_CFLAGS:-} -fno-omit-frame-pointer";    ;;  esac;  make -j "$nproc"   "EXTRA_CFLAGS=${EXTRA_CFLAGS:-}"   "LDFLAGS=${LDFLAGS:-}"  ;  rm python;  make -j "$nproc"   "EXTRA_CFLAGS=${EXTRA_CFLAGS:-}"   "LDFLAGS=${LDFLAGS:-} -Wl,-rpath='\$\$ORIGIN/../lib'"   python  ;  make install;   cd /;  rm -rf /usr/src/python;   find /usr/local -depth   \(    \( -type d -a \( -name test -o -name tests -o -name idle_test \) \)    -o \( -type f -a \( -name '*.pyc' -o -name '*.pyo' -o -name 'libpython*.a' \) \)   \) -exec rm -rf '{}' +  ;   ldconfig;   apt-mark auto '.*' > /dev/null;  apt-mark manual $savedAptMark;  find /usr/local -type f -executable -not \( -name '*tkinter*' \) -exec ldd '{}' ';'   | awk '/=>/ { so = $(NF-1); if (index(so, "/usr/local/") == 1) { next }; gsub("^/(usr/)?", "", so); printf "*%s\n", so }'   | sort -u   | xargs -rt dpkg-query --search   | awk 'sub(":$", "", $1) { print $1 }'   | sort -u   | xargs -r apt-mark manual  ;  apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false;  apt-get dist-clean;   export PYTHONDONTWRITEBYTECODE=1;  python3 --version;  pip3 --version # buildkit   36.8MB    buildkit.dockerfile.v0
+<missing>                                                                 10 days ago     ENV PYTHON_SHA256=5c8462af5790baf43a321a1559dbe0db06d1be4300fb85fb53c40060668e548a                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              0B        buildkit.dockerfile.v0
+<missing>                                                                 10 days ago     ENV PYTHON_VERSION=3.12.14                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      0B        buildkit.dockerfile.v0
+<missing>                                                                 10 days ago     ENV GPG_KEY=7169605F62C751356D054A26A821E680E5FA6305                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            0B        buildkit.dockerfile.v0
+<missing>                                                                 10 days ago     RUN /bin/sh -c set -eux;  apt-get update;  apt-get install -y --no-install-recommends   ca-certificates   netbase   tzdata  ;  apt-get dist-clean # buildkit                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    3.81MB    buildkit.dockerfile.v0
+<missing>                                                                 10 days ago     ENV LANG=C.UTF-8                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                0B        buildkit.dockerfile.v0
+<missing>                                                                 10 days ago     ENV PATH=/usr/local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            0B        buildkit.dockerfile.v0
+<missing>                                                                 3 weeks ago     # debian.sh --arch 'amd64' out/ 'trixie' '@1785715200'                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          78.6MB    debuerreotype 0.17
+kevo@Linux:~/devops-practice/task-A$ cd ..
+kevo@Linux:~/devops-practice$ mkdir task-B
+cd task-B
+kevo@Linux:~/devops-practice/task-B$ nano Dockerfile
+kevo@Linux:~/devops-practice/task-B$ docker build -t myapp:1.0 .
+[+] Building 5.8s (6/6) FINISHED                                                                                           docker:default
+ => [internal] load build definition from Dockerfile                                                                                 0.1s
+ => => transferring dockerfile: 116B                                                                                                 0.0s
+ => [internal] load metadata for docker.io/library/alpine:latest                                                                     1.6s
+ => [internal] load .dockerignore                                                                                                    0.0s
+ => => transferring context: 2B                                                                                                      0.0s
+ => [1/2] FROM docker.io/library/alpine:latest@sha256:28bd5fe8b56d1bd048e5babf5b10710ebe0bae67db86916198a6eec434943f8b               0.9s
+ => => resolve docker.io/library/alpine:latest@sha256:28bd5fe8b56d1bd048e5babf5b10710ebe0bae67db86916198a6eec434943f8b               0.0s
+ => => sha256:55afa1ecc21d2bb5e5045f32dafee56272ffd89860bac26f6c32123439af26a4 3.85MB / 3.85MB                                       0.3s
+ => => sha256:28bd5fe8b56d1bd048e5babf5b10710ebe0bae67db86916198a6eec434943f8b 9.22kB / 9.22kB                                       0.0s
+ => => sha256:79ff19e9084a00eece421b2523fb93e22d730e2c0e525905de047e848e56d95f 1.02kB / 1.02kB                                       0.0s
+ => => sha256:d529dd0c6e5597ac7e4a3e2dea65c3fcc6173f4cae713c409265c1dd9914a11b 611B / 611B                                           0.0s
+ => => extracting sha256:55afa1ecc21d2bb5e5045f32dafee56272ffd89860bac26f6c32123439af26a4                                            0.2s
+ => [2/2] RUN echo super-secret-123 > /tmp/t && rm /tmp/t                                                                            2.5s
+ => exporting to image                                                                                                               0.3s
+ => => exporting layers                                                                                                              0.2s
+ => => writing image sha256:2297fc6f4c5e6b23a355491289032592e8dc4a5650ec52d0cbf297006b950bb4                                         0.0s
+ => => naming to docker.io/library/myapp:1.0                                                                                         0.0s
+
+ 1 warning found (use docker --debug to expand):
+ - SecretsUsedInArgOrEnv: Do not use ARG or ENV instructions for sensitive data (ARG "TOKEN") (line 3)
+kevo@Linux:~/devops-practice/task-B$ docker history --no-trunc myapp:1.0
+IMAGE                                                                     CREATED          CREATED BY                                                                              SIZE      COMMENT
+sha256:2297fc6f4c5e6b23a355491289032592e8dc4a5650ec52d0cbf297006b950bb4   22 seconds ago   RUN |1 TOKEN=super-secret-123 /bin/sh -c echo $TOKEN > /tmp/t && rm /tmp/t # buildkit   0B        buildkit.dockerfile.v0
+<missing>                                                                 22 seconds ago   ARG TOKEN=super-secret-123                                                              0B        buildkit.dockerfile.v0
+<missing>                                                                 2 months ago     CMD ["/bin/sh"]                                                                         0B        buildkit.dockerfile.v0
+<missing>                                                                 2 months ago     ADD alpine-minirootfs-3.24.1-x86_64.tar.gz / # buildkit                                 8.42MB    buildkit.dockerfile.v0
+kevo@Linux:~/devops-practice/task-B$ docker history --no-trunc myapp:1.0 | Select-String "secret"
+Select-String: command not found
+kevo@Linux:~/devops-practice/task-B$ docker images
+REPOSITORY                                           TAG         IMAGE ID       CREATED              SIZE
+myapp                                                1.0         2297fc6f4c5e   About a minute ago   8.42MB
+my-python                                            latest      7949baf30379   2 minutes ago        137MB
+python                                               3.12        37ee34ed0a73   10 days ago          1.11GB
+python                                               3.12-slim   613c5454f914   10 days ago          119MB
+devops-practice-app                                  latest      6c8b153180f0   2 weeks ago          137MB
+postgres                                             16          8a4b04588618   2 weeks ago          451MB
+bomb                                                 1.0         8dc8301becff   2 weeks ago          137MB
+secret                                               1.0         f8fa1df3bb4d   2 weeks ago          137MB
+demo                                                 multi       a3da84185c1c   2 weeks ago          10.2MB
+<none>                                               <none>      08b609e7914c   2 weeks ago          137MB
+<none>                                               <none>      73924d5dae42   2 weeks ago          1.12GB
+<none>                                               <none>      cceec48fb454   3 weeks ago          1.12GB
+<none>                                               <none>      f0c4fc342916   3 weeks ago          1.12GB
+<none>                                               <none>      cb8e9df90d92   3 weeks ago          1.12GB
+<none>                                               <none>      8c7f9548c552   3 weeks ago          1.12GB
+<none>                                               <none>      5bef670c5205   3 weeks ago          1.12GB
+gcr.io/k8s-minikube/kicbase                          v0.0.50     6da180ef5035   6 months ago         1.37GB
+registry.k8s.io/ingress-nginx/kube-webhook-certgen   v1.6.7      d898bd44bc7b   6 months ago         38.6MB
+docker-compose-app-app                               latest      7d3a1b4da95e   13 months ago        67.3MB
+<none>                                               <none>      c84033d161d6   13 months ago        67.3MB
+my-file-writer                                       latest      4608264ff3f1   13 months ago        165MB
+<none>                                               <none>      92477fa30764   13 months ago        165MB
+my-calendar                                          2.0.0       e23fb415e819   13 months ago        45.3MB
+my-calendar                                          latest      f2c6582b04cf   13 months ago        45.3MB
+kev                                                  v2          7db72279fa79   13 months ago        261MB
+kev                                                  v1          e55709d94f7a   13 months ago        261MB
+mongo                                                latest      ccf68b64aa3e   14 months ago        901MB
+nginx                                                latest      9592f5595f2b   14 months ago        192MB
+tomcat                                               latest      1bfabdc3b70c   14 months ago        468MB
+nginx                                                1.27        1e5f3c5b981a   16 months ago        192MB
+hello-world                                          latest      74cc54e27dc4   19 months ago        10.1kB
+busybox                                              latest      6d3e4188a38a   23 months ago        4.28MB
+kevo@Linux:~/devops-practice/task-B$ docker run -d --name app-v1 -p 8000:8000 -e APP_VERSION=v1 myapp:1.0
+ff65a8e2cb1bcd38a9c5c0c2c6b9d9f4f15164ba5e1ffe53084c3a7650e10ad5
+kevo@Linux:~/devops-practice/task-B$ docker run -d --name app-v2 -p 8001:8000 -e APP_VERSION=v2 myapp:1.0
+69d7485bb928dafa44dd2c9c61503abcf143c50ef1664d2cf8ee2f3441355b33
+kevo@Linux:~/devops-practice/task-B$ docker run -d --name app-v3 -p 8002:8000 -e APP_VERSION=v3 myapp:1.0
+b18ed8bb47bcbeb50388dce4510085a68dc34d047fb65b70f0876cf2c53d0eb5
+kevo@Linux:~/devops-practice/task-B$ curl.exe http://localhost:8000
+curl.exe: command not found
+kevo@Linux:~/devops-practice/task-B$ curl http://localhost:8000
+curl: (7) Failed to connect to localhost port 8000 after 0 ms: Couldn't connect to server
+kevo@Linux:~/devops-practice/task-B$ docker ps
+CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
+kevo@Linux:~/devops-practice/task-B$ docker ps -a
+CONTAINER ID   IMAGE                                 COMMAND                  CREATED              STATUS                          PORTS                                                                                                                                  NAMES
+b18ed8bb47bc   myapp:1.0                             "/bin/sh"                About a minute ago   Exited (0) About a minute ago                                                                                                                                          app-v3
+69d7485bb928   myapp:1.0                             "/bin/sh"                About a minute ago   Exited (0) About a minute ago                                                                                                                                          app-v2
+ff65a8e2cb1b   myapp:1.0                             "/bin/sh"                About a minute ago   Exited (0) About a minute ago                                                                                                                                          app-v1
+791fa99fe9e0   gcr.io/k8s-minikube/kicbase:v0.0.50   "/usr/local/bin/entr…"   2 days ago           Exited (255) 27 hours ago       127.0.0.1:32818->22/tcp, 127.0.0.1:32819->2376/tcp, 127.0.0.1:32820->5000/tcp, 127.0.0.1:32821->8443/tcp, 127.0.0.1:32822->32443/tcp   shop-m02
+39e12ed34a25   gcr.io/k8s-minikube/kicbase:v0.0.50   "/usr/local/bin/entr…"   2 days ago           Exited (255) 27 hours ago       127.0.0.1:32813->22/tcp, 127.0.0.1:32814->2376/tcp, 127.0.0.1:32815->5000/tcp, 127.0.0.1:32816->8443/tcp, 127.0.0.1:32817->32443/tcp   shop
+kevo@Linux:~/devops-practice/task-B$ docker image inspect myapp:1.0 --format 'Entrypoint={{json .Config.Entrypoint}} Cmd={{json .Config.Cmd}}'
+Entrypoint=null Cmd=["/bin/sh"]
+kevo@Linux:~/devops-practice/task-B$ ls -la
+total 12
+drwxrwxr-x 2 kevo kevo 4096 Aug 24 18:07 .
+drwxrwxr-x 4 kevo kevo 4096 Aug 24 18:06 ..
+-rw-rw-r-- 1 kevo kevo   79 Aug 24 18:07 Dockerfile
+kevo@Linux:~/devops-practice/task-B$ cat Dockerfile
+FROM alpine
+
+ARG TOKEN=super-secret-123
+
+RUN echo $TOKEN > /tmp/t && rm /tmp/t
+kevo@Linux:~/devops-practice/task-B$ cd ..
+kevo@Linux:~/devops-practice$ docker build -t myapp:1.0 .
+[+] Building 9.1s (10/10) FINISHED                                                                                         docker:default
+ => [internal] load build definition from Dockerfile                                                                                 0.0s
+ => => transferring dockerfile: 258B                                                                                                 0.0s
+ => [internal] load metadata for docker.io/library/python:3.12-slim                                                                  0.0s
+ => [internal] load .dockerignore                                                                                                    0.1s
+ => => transferring context: 69B                                                                                                     0.0s
+ => CACHED [1/5] FROM docker.io/library/python:3.12-slim                                                                             0.1s
+ => [internal] load build context                                                                                                    0.3s
+ => => transferring context: 22.33kB                                                                                                 0.1s
+ => [2/5] WORKDIR /app                                                                                                               0.3s
+ => [3/5] COPY requirements_long.txt .                                                                                               0.1s
+ => [4/5] RUN pip install -r requirements_long.txt                                                                                   7.4s
+ => [5/5] COPY . .                                                                                                                   0.3s
+ => exporting to image                                                                                                               0.5s
+ => => exporting layers                                                                                                              0.4s
+ => => writing image sha256:51ac98829fe1e022304a3d188dc43e4133bfa7db55e7b499422f7868b3ebb581                                         0.0s
+ => => naming to docker.io/library/myapp:1.0                                                                                         0.0s
+kevo@Linux:~/devops-practice$ docker run -d --name app-v1 -p 8000:8000 -e APP_VERSION=v1 myapp:1.0
+docker: Error response from daemon: Conflict. The container name "/app-v1" is already in use by container "ff65a8e2cb1bcd38a9c5c0c2c6b9d9f4f15164ba5e1ffe53084c3a7650e10ad5". You have to remove (or rename) that container to be able to reuse that name.
+
+Run 'docker run --help' for more information
+kevo@Linux:~/devops-practice$ docker run -d --name app-v2 -p 8000:8000 -e APP_VERSION=v1 myapp:1.0
+docker: Error response from daemon: Conflict. The container name "/app-v2" is already in use by container "69d7485bb928dafa44dd2c9c61503abcf143c50ef1664d2cf8ee2f3441355b33". You have to remove (or rename) that container to be able to reuse that name.
+
+Run 'docker run --help' for more information
+kevo@Linux:~/devops-practice$ docker run -d --name app-vv1 -p 8000:8000 -e APP_VERSION=v1 myapp:1.0
+b8eea9405d0e0de74cb8fa7820e3241094341722685ae9329803cba5c79afafb
+kevo@Linux:~/devops-practice$ docker run -d --name app-vv2 -p 8001:8000 -e APP_VERSION=v2 myapp:1.0
+15467474fc06d01dc3e55137f1dc7fa36009acaf1c112bf43250d9fcac1c8d12
+kevo@Linux:~/devops-practice$ docker run -d --name app-vv3 -p 8002:8000 -e APP_VERSION=v3 myapp:1.0
+0705b21e90a7013c376a903c4dbb796ec87db418e86ef63b52e12025b7434e07
+kevo@Linux:~/devops-practice$ curl http://localhost:8000
+привіт із контейнера, версія v1
+kevo@Linux:~/devops-practice$ curl http://localhost:8001
+привіт із контейнера, версія v2
+kevo@Linux:~/devops-practice$ curl http://localhost:8002
+привіт із контейнера, версія v3
+kevo@Linux:~/devops-practice$ docker stop app-vv1
+app-vv1
+kevo@Linux:~/devops-practice$ docker ps
+CONTAINER ID   IMAGE       COMMAND           CREATED          STATUS          PORTS                                         NAMES
+0705b21e90a7   myapp:1.0   "python app.py"   49 seconds ago   Up 48 seconds   0.0.0.0:8002->8000/tcp, [::]:8002->8000/tcp   app-vv3
+15467474fc06   myapp:1.0   "python app.py"   59 seconds ago   Up 58 seconds   0.0.0.0:8001->8000/tcp, [::]:8001->8000/tcp   app-vv2
+kevo@Linux:~/devops-practice$ mkdir task-D
+cd task-D
+kevo@Linux:~/devops-practice/task-D$ nano Dockerfile
+kevo@Linux:~/devops-practice/task-D$ fsutil file createnew big.bin 52428800
+Command 'fsutil' not found, did you mean:
+  command 'sutil' from snap sutil (0.2.3)
+  command 'gsutil' from snap google-cloud-cli (581.0.0)
+  command 'gsutil' from deb gsutil (3.1-4)
+See 'snap info <snapname>' for additional versions.
+kevo@Linux:~/devops-practice/task-D$ dd if=/dev/zero of=big.bin bs=1M count=50
+50+0 records in
+50+0 records out
+52428800 bytes (52 MB, 50 MiB) copied, 0.0534623 s, 981 MB/s
+kevo@Linux:~/devops-practice/task-D$ ls -lh big.bin
+-rw-rw-r-- 1 kevo kevo 50M Aug 24 18:17 big.bin
+kevo@Linux:~/devops-practice/task-D$ docker build -t task-d .
+[+] Building 1.2s (5/5) FINISHED                                                                                           docker:default
+ => [internal] load build definition from Dockerfile                                                                                 0.1s
+ => => transferring dockerfile: 49B                                                                                                  0.0s
+ => [internal] load metadata for docker.io/library/alpine:latest                                                                     0.8s
+ => [internal] load .dockerignore                                                                                                    0.1s
+ => => transferring context: 2B                                                                                                      0.0s
+ => CACHED [1/1] FROM docker.io/library/alpine:latest@sha256:28bd5fe8b56d1bd048e5babf5b10710ebe0bae67db86916198a6eec434943f8b        0.0s
+ => exporting to image                                                                                                               0.1s
+ => => exporting layers                                                                                                              0.0s
+ => => writing image sha256:d529dd0c6e5597ac7e4a3e2dea65c3fcc6173f4cae713c409265c1dd9914a11b                                         0.0s
+ => => naming to docker.io/library/task-d                                                                                            0.0s
+kevo@Linux:~/devops-practice/task-D$ nano .dockerignore
+kevo@Linux:~/devops-practice/task-D$ docker build -t task-d .
+[+] Building 0.8s (5/5) FINISHED                                                                                           docker:default
+ => [internal] load build definition from Dockerfile                                                                                 0.1s
+ => => transferring dockerfile: 49B                                                                                                  0.0s
+ => [internal] load metadata for docker.io/library/alpine:latest                                                                     0.5s
+ => [internal] load .dockerignore                                                                                                    0.1s
+ => => transferring context: 48B                                                                                                     0.0s
+ => CACHED [1/1] FROM docker.io/library/alpine:latest@sha256:28bd5fe8b56d1bd048e5babf5b10710ebe0bae67db86916198a6eec434943f8b        0.0s
+ => exporting to image                                                                                                               0.0s
+ => => exporting layers                                                                                                              0.0s
+ => => writing image sha256:d529dd0c6e5597ac7e4a3e2dea65c3fcc6173f4cae713c409265c1dd9914a11b                                         0.0s
+ => => naming to docker.io/library/task-d                                                                                            0.0s
+kevo@Linux:~/devops-practice/task-D$ cd ..
+kevo@Linux:~/devops-practice$ docker run -d --name pid-test --entrypoint sleep alpine 300
+Unable to find image 'alpine:latest' locally
+latest: Pulling from library/alpine
+Digest: sha256:28bd5fe8b56d1bd048e5babf5b10710ebe0bae67db86916198a6eec434943f8b
+Status: Downloaded newer image for alpine:latest
+5278e375e3a4e16cfe68d2cd9633cdc2fac87a83b958b7a9c6d39e33b7e93760
+kevo@Linux:~/devops-practice$ docker top pid-test
+UID                 PID                 PPID                C                   STIME               TTY                 TIME                CMD
+root                7292                7268                1                   18:18               ?                   00:00:00            sleep 300
+kevo@Linux:~/devops-practice$ docker exec pid-test kill -TERM 1
+kevo@Linux:~/devops-practice$ docker ps -a
+CONTAINER ID   IMAGE                                 COMMAND                  CREATED          STATUS                      PORTS                                                                                                                                  NAMES
+5278e375e3a4   alpine                                "sleep 300"              51 seconds ago   Up 50 seconds                                                                                                                                                      pid-test
+0705b21e90a7   myapp:1.0                             "python app.py"          5 minutes ago    Up 5 minutes                0.0.0.0:8002->8000/tcp, [::]:8002->8000/tcp                                                                                            app-vv3
+15467474fc06   myapp:1.0                             "python app.py"          5 minutes ago    Up 5 minutes                0.0.0.0:8001->8000/tcp, [::]:8001->8000/tcp                                                                                            app-vv2
+b8eea9405d0e   myapp:1.0                             "python app.py"          5 minutes ago    Exited (0) 4 minutes ago                                                                                                                                           app-vv1
+b18ed8bb47bc   2297fc6f4c5e                          "/bin/sh"                10 minutes ago   Exited (0) 10 minutes ago                                                                                                                                          app-v3
+69d7485bb928   2297fc6f4c5e                          "/bin/sh"                10 minutes ago   Exited (0) 10 minutes ago                                                                                                                                          app-v2
+ff65a8e2cb1b   2297fc6f4c5e                          "/bin/sh"                11 minutes ago   Exited (0) 11 minutes ago                                                                                                                                          app-v1
+791fa99fe9e0   gcr.io/k8s-minikube/kicbase:v0.0.50   "/usr/local/bin/entr…"   2 days ago       Exited (255) 27 hours ago   127.0.0.1:32818->22/tcp, 127.0.0.1:32819->2376/tcp, 127.0.0.1:32820->5000/tcp, 127.0.0.1:32821->8443/tcp, 127.0.0.1:32822->32443/tcp   shop-m02
+39e12ed34a25   gcr.io/k8s-minikube/kicbase:v0.0.50   "/usr/local/bin/entr…"   2 days ago       Exited (255) 27 hours ago   127.0.0.1:32813->22/tcp, 127.0.0.1:32814->2376/tcp, 127.0.0.1:32815->5000/tcp, 127.0.0.1:32816->8443/tcp, 127.0.0.1:32817->32443/tcp   shop
+kevo@Linux:~/devops-practice$ mkdir task-F
+cd task-F
+
+
+kevo@Linux:~/devops-practice/task-F$ nano Dockerfile.slim
+kevo@Linux:~/devops-practice/task-F$ docker build -f Dockerfile.slim -t myapp:slim .
+[+] Building 7.9s (10/10) FINISHED                                                                       docker:default
+ => [internal] load build definition from Dockerfile.slim                                                          0.0s
+ => => transferring dockerfile: 178B                                                                               0.0s
+ => [internal] load metadata for docker.io/library/python:3.12-slim                                                0.0s
+ => [internal] load .dockerignore                                                                                  0.1s
+ => => transferring context: 2B                                                                                    0.0s
+ => [1/5] FROM docker.io/library/python:3.12-slim                                                                  0.0s
+ => [internal] load build context                                                                                  0.1s
+ => => transferring context: 111B                                                                                  0.0s
+ => CACHED [2/5] WORKDIR /app                                                                                      0.0s
+ => [3/5] COPY requirements.txt .                                                                                  0.2s
+ => [4/5] RUN pip install -r requirements.txt                                                                      6.1s
+ => [5/5] COPY app.py .                                                                                            0.6s
+ => exporting to image                                                                                             0.5s
+ => => exporting layers                                                                                            0.5s
+ => => writing image sha256:9f391e5b45aa0931a0173f8a5592a3a79a84bc99c9a0eff5a8ecf27572c6fec4                       0.0s
+ => => naming to docker.io/library/myapp:slim                                                                      0.0s
+kevo@Linux:~/devops-practice/task-F$ nano Dockerfile.alpine
+kevo@Linux:~/devops-practice/task-F$ nano Dockerfile.alpine
+kevo@Linux:~/devops-practice/task-F$ docker build -f Dockerfile.alpine -t myapp:alpine .
+[+] Building 27.5s (10/10) FINISHED                                                                      docker:default
+ => [internal] load build definition from Dockerfile.alpine                                                        0.1s
+ => => transferring dockerfile: 182B                                                                               0.0s
+ => [internal] load metadata for docker.io/library/python:3.12-alpine                                              1.6s
+ => [internal] load .dockerignore                                                                                  0.0s
+ => => transferring context: 2B                                                                                    0.0s
+ => [1/5] FROM docker.io/library/python:3.12-alpine@sha256:d09d15e60962ca365d1cd544a48773bac9d33f2fb1b00f2aa0dee  15.9s
+ => => resolve docker.io/library/python:3.12-alpine@sha256:d09d15e60962ca365d1cd544a48773bac9d33f2fb1b00f2aa0deec  0.1s
+ => => sha256:1148adc3b50891ee01e6add44be22d277dedeb8dcac2f7cc8b700dd710c75c4d 5.42kB / 5.42kB                     0.0s
+ => => sha256:0021712cb493a0e6a23e7793de77e942d10e7e3aba2c215389755dff3e1f08f0 408.09kB / 408.09kB                 0.4s
+ => => sha256:7eec6ed36766e2cb281c079d0a3987132533e88a558748d3f71e0efe80f8d7c5 13.77MB / 13.77MB                   3.4s
+ => => sha256:d09d15e60962ca365d1cd544a48773bac9d33f2fb1b00f2aa0deec78ade7dc31 10.30kB / 10.30kB                   0.0s
+ => => sha256:285a71327884a4d50efbea30104473b0fa43ecefa499458899670ca30dae76e5 1.74kB / 1.74kB                     0.0s
+ => => sha256:5086b6265f8c1341de4871e36c183358e1f20dbacf78b4a507c48d6bd28e4ec1 247B / 247B                         0.5s
+ => => extracting sha256:0021712cb493a0e6a23e7793de77e942d10e7e3aba2c215389755dff3e1f08f0                          3.2s
+ => => extracting sha256:7eec6ed36766e2cb281c079d0a3987132533e88a558748d3f71e0efe80f8d7c5                          9.9s
+ => => extracting sha256:5086b6265f8c1341de4871e36c183358e1f20dbacf78b4a507c48d6bd28e4ec1                          0.0s
+ => [internal] load build context                                                                                  0.1s
+ => => transferring context: 62B                                                                                   0.0s
+ => [2/5] WORKDIR /app                                                                                             0.3s
+ => [3/5] COPY requirements.txt .                                                                                  0.2s
+ => [4/5] RUN pip install -r requirements.txt                                                                      7.9s
+ => [5/5] COPY app.py .                                                                                            0.7s
+ => exporting to image                                                                                             0.6s
+ => => exporting layers                                                                                            0.6s
+ => => writing image sha256:7f360a97ccc519ebc1110808dc14576ca8d1723de45261a7a157d725ca68e44e                       0.0s
+ => => naming to docker.io/library/myapp:alpine                                                                    0.0s
+kevo@Linux:~/devops-practice/task-F$ docker images myapp
+REPOSITORY   TAG       IMAGE ID       CREATED              SIZE
+myapp        alpine    7f360a97ccc5   40 seconds ago       62.6MB
+myapp        slim      9f391e5b45aa   About a minute ago   133MB
+myapp        1.0       51ac98829fe1   12 minutes ago       137MB
+kevo@Linux:~/devops-practice/task-F$ docker run --rm myapp:slim
+Hello from Python
+kevo@Linux:~/devops-practice/task-F$ docker run --rm myapp:alpine
+Hello from Python
+kevo@Linux:~/devops-practice/task-F$ cd ..
+kevo@Linux:~/devops-practice$ docker run -d --name nginx1 -p 8080:80 nginx
+0f94f620830c0a6377fdc1b1468560b13a23335a522013a32922620534cd0344
+kevo@Linux:~/devops-practice$ docker run -d --name nginx2 -p 8081:80 nginx
+60dc744607cd8992657828305786f6f9fa7094f6665e7a1330eb16c45bb9f3c2
+kevo@Linux:~/devops-practice$ docker ps
+CONTAINER ID   IMAGE       COMMAND                  CREATED          STATUS          PORTS                                         NAMES
+60dc744607cd   nginx       "/docker-entrypoint.…"   10 seconds ago   Up 9 seconds    0.0.0.0:8081->80/tcp, [::]:8081->80/tcp       nginx2
+0f94f620830c   nginx       "/docker-entrypoint.…"   17 seconds ago   Up 15 seconds   0.0.0.0:8080->80/tcp, [::]:8080->80/tcp       nginx1
+0705b21e90a7   myapp:1.0   "python app.py"          14 minutes ago   Up 14 minutes   0.0.0.0:8002->8000/tcp, [::]:8002->8000/tcp   app-vv3
+15467474fc06   myapp:1.0   "python app.py"          14 minutes ago   Up 14 minutes   0.0.0.0:8001->8000/tcp, [::]:8001->8000/tcp   app-vv2
+kevo@Linux:~/devops-practice$ curl http://localhost:8080
+<!DOCTYPE html>
+<html>
+<head>
+<title>Welcome to nginx!</title>
+<style>
+html { color-scheme: light dark; }
+body { width: 35em; margin: 0 auto;
+font-family: Tahoma, Verdana, Arial, sans-serif; }
+</style>
+</head>
+<body>
+<h1>Welcome to nginx!</h1>
+<p>If you see this page, the nginx web server is successfully installed and
+working. Further configuration is required.</p>
+
+<p>For online documentation and support please refer to
+<a href="http://nginx.org/">nginx.org</a>.<br/>
+Commercial support is available at
+<a href="http://nginx.com/">nginx.com</a>.</p>
+
+<p><em>Thank you for using nginx.</em></p>
+</body>
+</html>
+kevo@Linux:~/devops-practice$ curl http://localhost:8081
+<!DOCTYPE html>
+<html>
+<head>
+<title>Welcome to nginx!</title>
+<style>
+html { color-scheme: light dark; }
+body { width: 35em; margin: 0 auto;
+font-family: Tahoma, Verdana, Arial, sans-serif; }
+</style>
+</head>
+<body>
+<h1>Welcome to nginx!</h1>
+<p>If you see this page, the nginx web server is successfully installed and
+working. Further configuration is required.</p>
+
+<p>For online documentation and support please refer to
+<a href="http://nginx.org/">nginx.org</a>.<br/>
+Commercial support is available at
+<a href="http://nginx.com/">nginx.com</a>.</p>
+
+<p><em>Thank you for using nginx.</em></p>
+</body>
+</html>
+kevo@Linux:~/devops-practice$ docker exec nginx1 nginx -T
+# configuration file /etc/nginx/nginx.conf:
+
+user  nginx;
+worker_processes  auto;
+
+error_log  /var/log/nginx/error.log notice;
+pid        /run/nginx.pid;
+
+
+events {
+    worker_connections  1024;
+}
+
+
+http {
+    include       /etc/nginx/mime.types;
+    default_type  application/octet-stream;
+
+    log_format  main  '$remote_addr - $remote_user [$time_local] "$request" '
+                      '$status $body_bytes_sent "$http_referer" '
+                      '"$http_user_agent" "$http_x_forwarded_for"';
+
+    access_log  /var/log/nginx/access.log  main;
+
+    sendfile        on;
+    #tcp_nopush     on;
+
+    keepalive_timeout  65;
+
+    #gzip  on;
+
+    include /etc/nginx/conf.d/*.conf;
+}
+
+# configuration file /etc/nginx/mime.types:
+
+types {
+    text/html                                        html htm shtml;
+    text/css                                         css;
+    text/xml                                         xml;
+    image/gif                                        gif;
+    image/jpeg                                       jpeg jpg;
+    application/javascript                           js;
+    application/atom+xml                             atom;
+    application/rss+xml                              rss;
+
+    text/mathml                                      mml;
+    text/plain                                       txt;
+    text/vnd.sun.j2me.app-descriptor                 jad;
+    text/vnd.wap.wml                                 wml;
+    text/x-component                                 htc;
+
+    image/avif                                       avif;
+    image/png                                        png;
+    image/svg+xml                                    svg svgz;
+    image/tiff                                       tif tiff;
+    image/vnd.wap.wbmp                               wbmp;
+    image/webp                                       webp;
+    image/x-icon                                     ico;
+    image/x-jng                                      jng;
+    image/x-ms-bmp                                   bmp;
+
+    font/woff                                        woff;
+    font/woff2                                       woff2;
+
+    application/java-archive                         jar war ear;
+    application/json                                 json;
+    application/mac-binhex40                         hqx;
+    application/msword                               doc;
+    application/pdf                                  pdf;
+    application/postscript                           ps eps ai;
+    application/rtf                                  rtf;
+    application/vnd.apple.mpegurl                    m3u8;
+    application/vnd.google-earth.kml+xml             kml;
+    application/vnd.google-earth.kmz                 kmz;
+    application/vnd.ms-excel                         xls;
+    application/vnd.ms-fontobject                    eot;
+    application/vnd.ms-powerpoint                    ppt;
+    application/vnd.oasis.opendocument.graphics      odg;
+    application/vnd.oasis.opendocument.presentation  odp;
+    application/vnd.oasis.opendocument.spreadsheet   ods;
+    application/vnd.oasis.opendocument.text          odt;
+    application/vnd.openxmlformats-officedocument.presentationml.presentation
+                                                     pptx;
+    application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+                                                     xlsx;
+    application/vnd.openxmlformats-officedocument.wordprocessingml.document
+                                                     docx;
+    application/vnd.wap.wmlc                         wmlc;
+    application/wasm                                 wasm;
+    application/x-7z-compressed                      7z;
+    application/x-cocoa                              cco;
+    application/x-java-archive-diff                  jardiff;
+    application/x-java-jnlp-file                     jnlp;
+    application/x-makeself                           run;
+    application/x-perl                               pl pm;
+    application/x-pilot                              prc pdb;
+    application/x-rar-compressed                     rar;
+    application/x-redhat-package-manager             rpm;
+    application/x-sea                                sea;
+    application/x-shockwave-flash                    swf;
+    application/x-stuffit                            sit;
+    application/x-tcl                                tcl tk;
+    application/x-x509-ca-cert                       der pem crt;
+    application/x-xpinstall                          xpi;
+    application/xhtml+xml                            xhtml;
+    application/xspf+xml                             xspf;
+    application/zip                                  zip;
+
+    application/octet-stream                         bin exe dll;
+    application/octet-stream                         deb;
+    application/octet-stream                         dmg;
+    application/octet-stream                         iso img;
+    application/octet-stream                         msi msp msm;
+
+    audio/midi                                       mid midi kar;
+    audio/mpeg                                       mp3;
+    audio/ogg                                        ogg;
+    audio/x-m4a                                      m4a;
+    audio/x-realaudio                                ra;
+
+    video/3gpp                                       3gpp 3gp;
+    video/mp2t                                       ts;
+    video/mp4                                        mp4;
+    video/mpeg                                       mpeg mpg;
+    video/quicktime                                  mov;
+    video/webm                                       webm;
+    video/x-flv                                      flv;
+    video/x-m4v                                      m4v;
+    video/x-mng                                      mng;
+    video/x-ms-asf                                   asx asf;
+    video/x-ms-wmv                                   wmv;
+    video/x-msvideo                                  avi;
+}
+
+# configuration file /etc/nginx/conf.d/default.conf:
+server {
+    listen       80;
+    listen  [::]:80;
+    server_name  localhost;
+
+    #access_log  /var/log/nginx/host.access.log  main;
+
+    location / {
+        root   /usr/share/nginx/html;
+        index  index.html index.htm;
+    }
+
+    #error_page  404              /404.html;
+
+    # redirect server error pages to the static page /50x.html
+    #
+    error_page   500 502 503 504  /50x.html;
+    location = /50x.html {
+        root   /usr/share/nginx/html;
+    }
+
+    # proxy the PHP scripts to Apache listening on 127.0.0.1:80
+    #
+    #location ~ \.php$ {
+    #    proxy_pass   http://127.0.0.1;
+    #}
+
+    # pass the PHP scripts to FastCGI server listening on 127.0.0.1:9000
+    #
+    #location ~ \.php$ {
+    #    root           html;
+    #    fastcgi_pass   127.0.0.1:9000;
+    #    fastcgi_index  index.php;
+    #    fastcgi_param  SCRIPT_FILENAME  /scripts$fastcgi_script_name;
+    #    include        fastcgi_params;
+    #}
+
+    # deny access to .htaccess files, if Apache's document root
+    # concurs with nginx's one
+    #
+    #location ~ /\.ht {
+    #    deny  all;
+    #}
+}
+
+
+nginx: the configuration file /etc/nginx/nginx.conf syntax is ok
+nginx: configuration file /etc/nginx/nginx.conf test is successful
+kevo@Linux:~/devops-practice$ docker exec nginx2 nginx -T
+nginx: the configuration file /etc/nginx/nginx.conf syntax is ok
+nginx: configuration file /etc/nginx/nginx.conf test is successful
+# configuration file /etc/nginx/nginx.conf:
+
+user  nginx;
+worker_processes  auto;
+
+error_log  /var/log/nginx/error.log notice;
+pid        /run/nginx.pid;
+
+
+events {
+    worker_connections  1024;
+}
+
+
+http {
+    include       /etc/nginx/mime.types;
+    default_type  application/octet-stream;
+
+    log_format  main  '$remote_addr - $remote_user [$time_local] "$request" '
+                      '$status $body_bytes_sent "$http_referer" '
+                      '"$http_user_agent" "$http_x_forwarded_for"';
+
+    access_log  /var/log/nginx/access.log  main;
+
+    sendfile        on;
+    #tcp_nopush     on;
+
+    keepalive_timeout  65;
+
+    #gzip  on;
+
+    include /etc/nginx/conf.d/*.conf;
+}
+
+# configuration file /etc/nginx/mime.types:
+
+types {
+    text/html                                        html htm shtml;
+    text/css                                         css;
+    text/xml                                         xml;
+    image/gif                                        gif;
+    image/jpeg                                       jpeg jpg;
+    application/javascript                           js;
+    application/atom+xml                             atom;
+    application/rss+xml                              rss;
+
+    text/mathml                                      mml;
+    text/plain                                       txt;
+    text/vnd.sun.j2me.app-descriptor                 jad;
+    text/vnd.wap.wml                                 wml;
+    text/x-component                                 htc;
+
+    image/avif                                       avif;
+    image/png                                        png;
+    image/svg+xml                                    svg svgz;
+    image/tiff                                       tif tiff;
+    image/vnd.wap.wbmp                               wbmp;
+    image/webp                                       webp;
+    image/x-icon                                     ico;
+    image/x-jng                                      jng;
+    image/x-ms-bmp                                   bmp;
+
+    font/woff                                        woff;
+    font/woff2                                       woff2;
+
+    application/java-archive                         jar war ear;
+    application/json                                 json;
+    application/mac-binhex40                         hqx;
+    application/msword                               doc;
+    application/pdf                                  pdf;
+    application/postscript                           ps eps ai;
+    application/rtf                                  rtf;
+    application/vnd.apple.mpegurl                    m3u8;
+    application/vnd.google-earth.kml+xml             kml;
+    application/vnd.google-earth.kmz                 kmz;
+    application/vnd.ms-excel                         xls;
+    application/vnd.ms-fontobject                    eot;
+    application/vnd.ms-powerpoint                    ppt;
+    application/vnd.oasis.opendocument.graphics      odg;
+    application/vnd.oasis.opendocument.presentation  odp;
+    application/vnd.oasis.opendocument.spreadsheet   ods;
+    application/vnd.oasis.opendocument.text          odt;
+    application/vnd.openxmlformats-officedocument.presentationml.presentation
+                                                     pptx;
+    application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+                                                     xlsx;
+    application/vnd.openxmlformats-officedocument.wordprocessingml.document
+                                                     docx;
+    application/vnd.wap.wmlc                         wmlc;
+    application/wasm                                 wasm;
+    application/x-7z-compressed                      7z;
+    application/x-cocoa                              cco;
+    application/x-java-archive-diff                  jardiff;
+    application/x-java-jnlp-file                     jnlp;
+    application/x-makeself                           run;
+    application/x-perl                               pl pm;
+    application/x-pilot                              prc pdb;
+    application/x-rar-compressed                     rar;
+    application/x-redhat-package-manager             rpm;
+    application/x-sea                                sea;
+    application/x-shockwave-flash                    swf;
+    application/x-stuffit                            sit;
+    application/x-tcl                                tcl tk;
+    application/x-x509-ca-cert                       der pem crt;
+    application/x-xpinstall                          xpi;
+    application/xhtml+xml                            xhtml;
+    application/xspf+xml                             xspf;
+    application/zip                                  zip;
+
+    application/octet-stream                         bin exe dll;
+    application/octet-stream                         deb;
+    application/octet-stream                         dmg;
+    application/octet-stream                         iso img;
+    application/octet-stream                         msi msp msm;
+
+    audio/midi                                       mid midi kar;
+    audio/mpeg                                       mp3;
+    audio/ogg                                        ogg;
+    audio/x-m4a                                      m4a;
+    audio/x-realaudio                                ra;
+
+    video/3gpp                                       3gpp 3gp;
+    video/mp2t                                       ts;
+    video/mp4                                        mp4;
+    video/mpeg                                       mpeg mpg;
+    video/quicktime                                  mov;
+    video/webm                                       webm;
+    video/x-flv                                      flv;
+    video/x-m4v                                      m4v;
+    video/x-mng                                      mng;
+    video/x-ms-asf                                   asx asf;
+    video/x-ms-wmv                                   wmv;
+    video/x-msvideo                                  avi;
+}
+
+# configuration file /etc/nginx/conf.d/default.conf:
+server {
+    listen       80;
+    listen  [::]:80;
+    server_name  localhost;
+
+    #access_log  /var/log/nginx/host.access.log  main;
+
+    location / {
+        root   /usr/share/nginx/html;
+        index  index.html index.htm;
+    }
+
+    #error_page  404              /404.html;
+
+    # redirect server error pages to the static page /50x.html
+    #
+    error_page   500 502 503 504  /50x.html;
+    location = /50x.html {
+        root   /usr/share/nginx/html;
+    }
+
+    # proxy the PHP scripts to Apache listening on 127.0.0.1:80
+    #
+    #location ~ \.php$ {
+    #    proxy_pass   http://127.0.0.1;
+    #}
+
+    # pass the PHP scripts to FastCGI server listening on 127.0.0.1:9000
+    #
+    #location ~ \.php$ {
+    #    root           html;
+    #    fastcgi_pass   127.0.0.1:9000;
+    #    fastcgi_index  index.php;
+    #    fastcgi_param  SCRIPT_FILENAME  /scripts$fastcgi_script_name;
+    #    include        fastcgi_params;
+    #}
+
+    # deny access to .htaccess files, if Apache's document root
+    # concurs with nginx's one
+    #
+    #location ~ /\.ht {
+    #    deny  all;
+    #}
+}
+
+
+kevo@Linux:~/devops-practice$
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
